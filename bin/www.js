@@ -1,10 +1,10 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 require('dotenv').config();
 const chalk = require('chalk');
 const http = require('http');
 const app = require('../server');
 
-const port = process.env.SHOPIFY_APP_PORT || '3000';
+const port = process.env.SHOPIFY_APP_PORT || '8080';
 app.set('port', port);
 
 const server = http.createServer(app);

@@ -22,9 +22,6 @@ const {
   SHOPIFY_APP_HOST,
   SHOPIFY_APP_SECRET,
   NODE_ENV,
-  REDIS_HOST,
-  REDIS_PORT,
-  REDIS_PASS
 } = process.env;
 
 const shopifyConfig = {
@@ -60,29 +57,9 @@ const isDevelopment = NODE_ENV !== 'production';
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
-
-var redisProdClient = null;
-
-if(isDevelopment == false) {
-	const redis = require('redis');
-
-	// Connect to a redis server provisioned over at
-	// Redis Labs. See the README for more info.
-	redisProdClient = redis.createClient(
-	  REDIS_PORT || '13872',
-	  REDIS_HOST || 'redis-13872.c1.us-central1-2.gce.cloud.redislabs.com',
-	  {
-		'auth_pass': 'KmTF1gpikicOSBUWgb7n1es3DdmKIiC4',
-		'return_buffers': true
-	  }
-	).on('error', (err) => console.error('ERR:REDIS:', err));
-	//console.log(redisProdClient);
-}
-
 app.use(
   session({
-    //store: isDevelopment ? undefined : new RedisStore(),
-    store: new RedisStore({client: redisProdClient}),
+    store: isDevelopment ? undefined : new RedisStore(),
     secret: SHOPIFY_APP_SECRET,
     resave: true,
     saveUninitialized: false,

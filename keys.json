@@ -1,0 +1,5 @@
+{
+  "redisHost": redis-13872.c1.us-central1-2.gce.cloud.redislabs.com,
+  "redisPort": 13872,
+  "redisKey": sana0107
+}

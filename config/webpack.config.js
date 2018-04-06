@@ -29,6 +29,14 @@ const extraEntryFiles = isDevelopment
   ? ['react-hot-loader/patch', 'webpack-hot-middleware/client']
   : [];
 
+config = {
+    // ...
+    externals: {
+        '@google-cloud/storage': 'commonjs @google-cloud/storage'
+    },
+    // ...
+}
+
 module.exports = {
   plugins,
   target: 'web',
@@ -40,6 +48,7 @@ module.exports = {
       path.resolve(__dirname, '../client/index.js'),
     ],
   },
+
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../assets'),
@@ -98,4 +107,5 @@ module.exports = {
       },
     ],
   },
+
 };
